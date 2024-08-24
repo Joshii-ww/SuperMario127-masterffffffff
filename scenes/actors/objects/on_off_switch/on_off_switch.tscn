@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/actors/objects/on_off_switch/switch.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/on_off_switch.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/Switch.wav" type="AudioStream" id=3]
+[ext_resource path="res://classes/block_anim_curve.tres" type="Curve" id=9]
+[ext_resource path="res://classes/curve_tween.gd" type="Script" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22, 17 )
+
+[node name="OnOffSwitch" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="CurveTween" type="Tween" parent="Sprite"]
+script = ExtResource( 10 )
+curve = ExtResource( 9 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="HitCollider" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitCollider"]
+shape = SubResource( 2 )
+
+[node name="SwitchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

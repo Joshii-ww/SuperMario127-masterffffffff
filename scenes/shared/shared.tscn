@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/shared/shared.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/tilemap_loader.gd" type="Script" id=2]
+[ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=4]
+[ext_resource path="res://scenes/shared/objects.gd" type="Script" id=5]
+
+[node name="Shared" type="Node2D"]
+script = ExtResource( 1 )
+nodes_to_load = [ NodePath("Tilemaps"), NodePath("Objects") ]
+tilemaps = NodePath("Tilemaps")
+objects = NodePath("Objects")
+
+[node name="Tilemaps" type="Node2D" parent="."]
+script = ExtResource( 2 )
+very_back_tilemap = NodePath("VeryBack")
+back_tilemap = NodePath("Back")
+middle_tilemap = NodePath("Middle")
+front_tilemap = NodePath("Front")
+
+[node name="VeryBack" type="TileMap" parent="Tilemaps"]
+modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
+z_index = -10
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 262144
+collision_mask = 262144
+format = 1
+
+[node name="Back" type="TileMap" parent="Tilemaps"]
+modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
+z_index = -10
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 262144
+collision_mask = 262144
+format = 1
+
+[node name="Middle" type="TileMap" parent="Tilemaps"]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 16385
+collision_mask = 16385
+format = 1
+
+[node name="Front" type="TileMap" parent="Tilemaps"]
+light_mask = 524288
+z_index = 10
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 262144
+collision_mask = 262144
+format = 1
+
+[node name="Objects" type="Node" parent="."]
+script = ExtResource( 5 )
